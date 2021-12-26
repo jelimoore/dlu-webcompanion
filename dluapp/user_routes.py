@@ -3,7 +3,7 @@ from flask import Flask, request, redirect, render_template, make_response, json
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 from config import Config
 from dluapp.forms import loginForm, createUserForm
-from dluapp.models import Account
+from dluapp.models import Account, Character, CharacterData
 from datetime import datetime
 import logging
 import pytz

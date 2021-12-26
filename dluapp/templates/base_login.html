@@ -14,6 +14,20 @@
 
 <body class="text-center">
     <div class="container">
+        {# If the error value is set, display the error in red text #}
+        {% if error %}
+            <div class="alert alert-danger">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        {# If the message value is set, display the message in green text #}
+        {% if message %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endif %}
+        
         {% block content %} {% endblock %}
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

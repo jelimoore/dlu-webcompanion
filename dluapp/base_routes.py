@@ -3,7 +3,7 @@ from flask import Flask, request, redirect, render_template, make_response, json
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 from config import Config
 from dluapp.forms import loginForm, createUserForm, activateForm
-from dluapp.models import Account
+from dluapp.models import Account, PlayKey
 from datetime import datetime
 import logging
 import pytz
@@ -37,17 +37,40 @@ def logout():
 
 @app.route('/activate', methods=['GET', 'POST'])
 def activateAccount():
+    message = None
+    error = None
     if current_user.is_authenticated:
         return 'Cannot create new account while you are already logged in'
     form = activateForm()
     if form.validate_on_submit():
-        error = None
-        user = Account.query.filter_by(name=form.name.data).first()
-        if user is None or not user.check_password(form.password.data):
-            return render_template('activate.html', title='Sign In', form=form, signInFail=True)
-        login_user(user, remember=form.rememberMe.data)
-        return redirect('/')
-    return render_template('activate.html', title='Activate Account', form=form)
+        # check that the play key exists, is active, and has at least one use
+        playkey = PlayKey.query.filter_by(key_string=form.play_key.data).first()
+        if playkey is None or playkey.active==0 or playkey.key_uses==0:
+            error = "Invalid Play Key."
+        else:
+            # decrement the key uses
+            playkey.key_uses -= 1
+            # check that the username doesn't already exist
+            user = Account.query.filter_by(name=form.name.data).first()
+            if user is None:
+                # again for the email
+                user = Account.query.filter_by(email=form.email.data).first()
+                if user is None:
+                    # check that both passwords match
+                    if (form.password.data == form.password2.data):
+                        user = Account(email=form.email.data, name=form.name.data, gm_level=0, locked=0, banned=0, play_key_id=playkey.id, mute_expire=0)
+                        user.set_password(form.password.data)
+                        db.session.add(user)
+                        db.session.commit()
+                        message = "Successfully created account."
+                    else:
+                        error = "Passwords do not match."
+                else:
+                    error = "Email already exists."
+            else:
+                error = "That username already exists."
+        
+    return render_template('activate.html', form=form, message=message, error=error)
 
 @app.route('/createAccount', methods=['GET', 'POST'])
 @login_required
