@@ -1,0 +1,31 @@
+/* Set the size of the div element that contains the map */
+
+#map {
+    height: 800px;
+    /* width: 100%; */
+}
+
+.column {
+    float: left;
+}
+
+.left-side {
+    width: 15%;
+    float: left;
+    padding: 15px;
+}
+
+.right-side {
+    width: 15%;
+    float: right;
+    padding: 15px;
+}
+
+.middle {
+    display: inline-block;
+    width: 70%;
+}
+
+.side-heading {
+    text-align: center;
+}
