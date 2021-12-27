@@ -2,7 +2,7 @@ from dluapp import app, db
 from flask import Flask, request, redirect, render_template, make_response, jsonify, Response
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 from config import Config
-from dluapp.forms import loginForm, createUserForm
+from dluapp.forms import renameCharacterForm
 from dluapp.models import Account, Character, CharacterData, Leaderboard
 from datetime import datetime
 import logging
@@ -17,12 +17,26 @@ def index():
     chars = Character.query.filter_by(account_id=current_user.id).all()
     return render_template('index.html', characters=chars)
 
+@app.route('/characters/<id>', methods=['GET', 'POST'])
+@login_required
+def character_info(id):
+    form = renameCharacterForm()
+    if form.validate_on_submit():
+        #grab the ID requested and verify the account logged in has permission to edit it
+        character = Character.query.filter_by(id=id).filter_by(account_id=current_user.id).first()
+        if character is not None:
+            character.pending_name = form.requested_name.data
+            db.session.commit()
+    #snag all the characters from the db
+    #important that we do this after the change so the new name shows up
+    char = Character.query.filter_by(id=id).filter_by(account_id=current_user.id).first()
+    return render_template('charinfo.html', character=char, form=form)
+
 @app.route('/download_charxml', methods=['GET'])
 @login_required
 def download_charxml():
     requested_id = request.args.get('id')
     #TODO: make sure that this account is authorized to download that user's info
-
     charxml = CharacterData.query.filter_by(id=requested_id).first()
     return Response(charxml.xml_data, mimetype='text/plain')
 

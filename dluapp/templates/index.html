@@ -9,14 +9,10 @@
     {% for character in characters %}
     <li>
 
-        <h3>{{ character.name }}</h3>
+        <h3><a href='/characters/{{ character.id }}'>{{ character.name }}</a></h3>
         {% if character.pending_name %}
-        ({{ character.pending_name }} pending approval by Mythrans)
+        <i>(Name "{{ character.pending_name }}" pending approval by Mythrans)</i>
         {% endif %}
-    <p>Level: 0</p>
-    <p>Coins: 0</p>
-    <p>Last World: 0</p>
-    <p>Last Login: 0</p>
     <p><a class="" href="/download_charxml?id={{ character.id }}">Download XML</a></p>
     </p>
 

@@ -23,3 +23,7 @@ class activateForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder": "Password", "class": "form-control"})
     password2 = PasswordField('Repeat Password', validators=[DataRequired()], render_kw={"placeholder": "Repeat Password", "class": "form-control"})
     submit = SubmitField('Create Account', render_kw={"class": "btn btn-primary"})
+
+class renameCharacterForm(FlaskForm):
+    requested_name = StringField('Requested Name', validators=[DataRequired()], render_kw={"placeholder": "Requested Name", "class": "form-control"})
+    submit = SubmitField('Submit', render_kw={"class": "btn btn-primary"})

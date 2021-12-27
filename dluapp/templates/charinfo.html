@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Your Characters</h2>
+
+{% if character %}
+<h3>{{ character.name }}</h3>
+    {% if character.pending_name %}
+    <i>(Name "{{ character.pending_name }}" pending approval by Mythrans)</i>
+    {% endif %}
+
+    <form action="" method="post" novalidate class="form-signin">
+        <h4 class="h3 mb-3 font-weight-normal">Update Name</h4>
+        {{ form.hidden_tag() }}
+        {{ form.requested_name }}
+        {% for error in form.requested_name.errors %} <span style="color: red;">[{{ error }}]</span> {% endfor %}
+        {{ form.submit }}
+    </form>
+
+<p><a class="" href="/download_charxml?id={{ character.id }}">Download XML</a></p>
+
+{% else %}
+
+<p>I couldn't find a character by that ID.</p>
+
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<!-- -->
+{% endblock %}
