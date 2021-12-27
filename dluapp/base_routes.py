@@ -10,7 +10,6 @@ import pytz
 
 login = LoginManager(app)
 login.login_view = 'login'
-app.config['SECRET_KEY'] = 'fsudhfliuAEH32078SdhOUIHesogh045'
 
 
 @login.user_loader
