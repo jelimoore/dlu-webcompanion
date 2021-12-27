@@ -4,14 +4,14 @@ A better DarkFlame Universe web companion app.
 ## Features
 User Features:
 - Displays leaderboards from in-game
+- Play key activation
 - Request name change [WIP]
 - Password reset via email [WIP]
-- Play key activation
 
 Admin Features:
 - Player and Pet name approval
-- Property name approval
-- Kick/ban in-game via web interface (no need to log into LU)
+- Property approval [WIP; properties are really broken so /shrug]
+- Kick/ban in-game via web interface (no need to log into LU) [WIP]
 
 ## Setup
 
