@@ -1,5 +1,5 @@
 from dluapp import app, db
-from flask import Flask, request, redirect, render_template, make_response, jsonify
+from flask import Flask, request, redirect, render_template, make_response, jsonify, Response
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 from config import Config
 from dluapp.forms import loginForm, createUserForm
@@ -13,8 +13,18 @@ import time
 @app.route('/', methods=['GET'])
 @login_required
 def index():
-    #snag all the characters from the 
-    return render_template('index.html', name=current_user.name)
+    #snag all the characters from the db
+    chars = Character.query.filter_by(account_id=current_user.id).all()
+    return render_template('index.html', characters=chars)
+
+@app.route('/download_charxml', methods=['GET'])
+@login_required
+def download_charxml():
+    requested_id = request.args.get('id')
+    #TODO: make sure that this account is authorized to download that user's info
+
+    charxml = CharacterData.query.filter_by(id=requested_id).first()
+    return Response(charxml.xml_data, mimetype='text/plain')
 
 @app.route('/leaderboards', methods=['GET'])
 @login_required

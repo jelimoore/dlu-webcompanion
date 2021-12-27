@@ -51,7 +51,6 @@ class Character(db.Model):
 
     # ORM backrefs
     characterData = db.relationship('CharacterData', backref='charinfo', lazy=True)
-    leaderboards = db.relationship('Leaderboard', backref='charinfo', lazy=True)
 
 
 class CharacterData(db.Model):

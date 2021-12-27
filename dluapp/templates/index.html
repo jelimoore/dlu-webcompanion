@@ -2,7 +2,33 @@
 
 {% block content %}
 
-<h2>Welcome back, {{ name }}!</h2>
+<h2>Your Characters</h2>
+
+{% if characters %}
+<ul>
+    {% for character in characters %}
+    <li>
+
+        <h3>{{ character.name }}</h3>
+        {% if character.pending_name %}
+        ({{ character.pending_name }} pending approval by Mythrans)
+        {% endif %}
+    <p>Level: 0</p>
+    <p>Coins: 0</p>
+    <p>Last World: 0</p>
+    <p>Last Login: 0</p>
+    <p><a class="" href="/download_charxml?id={{ character.id }}">Download XML</a></p>
+    </p>
+
+    {% endfor %}
+    </li>
+</ul>
+
+{% else %}
+
+<p>You don't have any characters yet!</p>
+
+{% endif %}
 
 {% endblock %}
 
