@@ -13,6 +13,7 @@ import time
 @app.route('/', methods=['GET'])
 @login_required
 def index():
+    #snag all the characters from the 
     return render_template('index.html', name=current_user.name)
 
 @app.route('/leaderboards', methods=['GET'])
