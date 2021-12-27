@@ -1,34 +1,64 @@
 {
-    "activities": {
-        "1": {
-            "name": "Avant Gardens Obstacle Course"
+    "activities": [
+        {
+            "id": 1,
+            "name": "Avant Gardens Obstacle Course",
+            "sort": "asc",
+            "sort_by": "time"
         },
-        "5": {
-            "name": "Avant Gardens Survival"
+        {
+            "id": 5,
+            "name": "Avant Gardens Survival",
+            "sort": "desc",
+            "sort_by": "time"
         },
-        "46": {
-            "name": "Forbidden Valley Footrace 1"
+        {
+            "id": 46,
+            "name": "Forbidden Valley Footrace 1",
+            "sort": "asc",
+            "sort_by": "time"
         },
-        "47": {
-            "name": "Forbidden Valley Footrace 2"
+        {
+            "id": 47,
+            "name": "Forbidden Valley Footrace 2",
+            "sort": "asc",
+            "sort_by": "time"
         },
-        "48": {
-            "name": "Forbidden Valley Footrace 3"
+        {
+            "id": 48,
+            "name": "Forbidden Valley Footrace 3",
+            "sort": "asc",
+            "sort_by": "time"
         },
-        "49": {
-            "name": "Nimbus Station Footrace 1"
+        {
+            "id": 49,
+            "name": "Nimbus Station Footrace 1",
+            "sort": "asc",
+            "sort_by": "time"
         },
-        "53": {
-            "name": "Avant Gardens Footrace"
+        {
+            "id": 53,
+            "name": "Avant Gardens Footrace",
+            "sort": "asc",
+            "sort_by": "time"
         },
-        "61": {
-            "name": "Avant Gardens Obstacle Course"
+        {
+            "id": 61,
+            "name": "Avant Gardens Obstacle Course",
+            "sort": "asc",
+            "sort_by": "time"
         },
-        "1864": {
-            "name": "Gnarled Forest Shooting Gallery"
+        {
+            "id": 1864,
+            "name": "Gnarled Forest Shooting Gallery",
+            "sort": "desc",
+            "sort_by": "score"
         },
-        "1901": {
-            "name": "Nimbus Tower Footrace"
+        {
+            "id": 1901,
+            "name": "Nimbus Tower Footrace",
+            "sort": "asc",
+            "sort_by": "time"
         }
-    }
+    ]
 }

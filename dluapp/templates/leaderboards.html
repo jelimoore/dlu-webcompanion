@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for leaderboard in leaderboards %}
+
+<h2>{{ leaderboard.name }}</h2>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>{{ leaderboard.value_header }}</th>
+    </tr>
+    {% for player in leaderboard.player_scores %}
+        <tr>
+            <td>{{ player.name }}</td>
+            <td>{{ player.value }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endfor %}
+
+{% endblock %}
+
+{% block scripts %}
+<!-- -->
+{% endblock %}

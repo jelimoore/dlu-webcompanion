@@ -68,6 +68,10 @@ class Leaderboard(db.Model):
     time = db.Column(db.BigInteger)
     score = db.Column(db.BigInteger)
 
+    #ORM backrefs
+    character = db.relationship('Character', backref='charinfo', lazy=True)
+
+
 class PlayKey(db.Model):
     __tablename__ = 'play_keys'
     id = db.Column(db.Integer, primary_key=True)
@@ -78,4 +82,4 @@ class PlayKey(db.Model):
     claimed_by = db.Column(db.String(255))
 
     # ORM backrefs
-    accounts = db.relationship('Account', backref='play_keys', lazy=True)
+    account = db.relationship('Account', backref='play_keys', lazy=True)
